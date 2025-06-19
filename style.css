@@ -1,0 +1,164 @@
+/* ----------- General ----------- */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Georgia", serif;
+  color: #fff;
+  overflow: hidden;
+  background: #000;
+}
+
+/* ----------- Background Scene ----------- */
+#scene {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Moving clouds */
+.clouds {
+  background: url('https://www.transparenttextures.com/patterns/clouds.png');
+  opacity: 0.12;
+  animation: moveClouds 60s linear infinite;
+}
+
+@keyframes moveClouds {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Rising fog */
+.fog {
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(20,20,20,0.5) 40%,
+    rgba(0,0,0,0.8) 100%
+  );
+  animation: fogUp 15s ease-in-out infinite;
+}
+
+@keyframes fogUp {
+  0%,100% { transform: translateY(30px); }
+  50%     { transform: translateY(-40px); }
+}
+
+/* ----------- Foreground Content ----------- */
+#content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding-top: 10vh;
+}
+
+h1 {
+  font-size: 4rem;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.gold {
+  color: #d4af37;
+  text-shadow: 0 0 10px rgba(212,175,55,0.7);
+}
+
+h2 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin: 0 0 40px 0;
+  color: #fff;
+}
+
+/* ----------- Chat Box ----------- */
+#chatbox {
+  width: 70%;
+  max-width: 650px;
+  margin: 0 auto;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 6px;
+  padding: 20px;
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+#messages {
+  flex: 1;
+  overflow-y: auto;
+  font-size: 1rem;
+  text-align: left;
+}
+
+#userInput {
+  margin-top: 10px;
+  padding: 10px;
+  background: #111;
+  border: 1px solid #444;
+  color: #fff;
+  border-radius: 4px;
+}
+
+/* Name coloring */
+.nameClerk { color: #ffd54f; }
+.nameYou   { color: #ffffff; }
+
+/* ----------- Key Section ----------- */
+#keySection {
+  margin-top: 30px;
+}
+
+#keyButton {
+  font-size: 3rem;
+  color: transparent;
+  -webkit-text-stroke: 2px #ffffff;
+  cursor: not-allowed;
+  transition: filter 0.4s, color 0.4s, -webkit-text-stroke 0.4s;
+  display: inline-block;
+}
+
+#enterText {
+  margin-top: 5px;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Active State */
+#keyButton.active {
+  color: #d4af37;
+  -webkit-text-stroke: 0;
+  filter: drop-shadow(0 0 6px #d4af37);
+  cursor: pointer;
+}
+
+#enterText.active {
+  color: #fff;
+  text-shadow: 0 0 6px #fff;
+}
+
+/* ----------- Responsive ----------- */
+@media (max-width: 600px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 1rem;   }
+  #chatbox { width: 90%; height: 220px; }
+  #keyButton { font-size: 2.5rem; }
+}
